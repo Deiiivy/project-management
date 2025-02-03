@@ -4,10 +4,10 @@ import cors from 'cors'
 import dotenv from 'dotenv'
 import connect from './database/dbConnection.js'
 
-
 dotenv.config();
 
 const app = express();
+const route = express.Router();
 
 // middlewares
 
@@ -27,6 +27,10 @@ connect().then(connection => {
   console.log("error to connect to database", err)
 })
 
+
+app.get('/', function() => {
+  res.send('hello word')
+})
 
 app.listen(PORT, () => {
   console.log(`server running in the port: ${PORT}` )
