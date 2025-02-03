@@ -28,7 +28,7 @@ connect().then(connection => {
 })
 
 
-app.get('/', function() => {
+app.get('/', function() {
   res.send('hello word')
 })
 
