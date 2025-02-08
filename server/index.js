@@ -2,7 +2,9 @@ import express from 'express'
 import bodyParser from 'body-parser'
 import cors from 'cors'
 import dotenv from 'dotenv'
-import connect from './database/dbConnection.js'
+import  { connect } from './database/dbConnection.js'
+import User from './models/user.js'
+import router from './routes/routes.js'
 
 dotenv.config();
 
@@ -13,6 +15,7 @@ const route = express.Router();
 
 app.use(bodyParser.json());
 app.use(cors());
+app.use('/projectManagement', router)
 
 
 // PORT
@@ -20,14 +23,16 @@ app.use(cors());
 
 let db;
 
-connect().then(connection => {
+connect().then(async (connection) => {
   db = connection;
   console.log('conect to database')
 }).catch(err => {
   console.log("error to connect to database", err)
 })
 
+app.use('/projectManagement', router)
 
+  
 app.get('/', function() {
   res.send('hello word')
 })
@@ -35,3 +40,5 @@ app.get('/', function() {
 app.listen(PORT, () => {
   console.log(`server running in the port: ${PORT}` )
 })
+
+export default db;
