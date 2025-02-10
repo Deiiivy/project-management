@@ -13,6 +13,25 @@ export const createUser = async(req, res) => {
     catch (error) {
     console.log('error al crear usuario: ' + error)
   }
+
 }
+ // login user
+export const loginUser = async(req, res) => {
+  try {
 
+    const {name, password} = req.body;
+    const user = await User.findOne({
+      where: {name, password}
+    })
 
+    if(!user) {
+      res.status(500).send("User no found")
+      console.log("user no found")
+    }
+    const idUser = user.id;
+    res.send(`Welcome User: ${user.name}`)
+    console.log(`id usuario: ${idUser}`)
+  } catch (error){
+      console.log(`error al obtener usuario: ` + error)
+    }
+}
