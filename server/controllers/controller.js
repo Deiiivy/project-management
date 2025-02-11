@@ -65,3 +65,52 @@ export const createTask = async(req, res) => {
     console.log(`error al crear tarea: ${error}`)
   }
 }
+
+// getAllTasks
+
+export const getAllTasks = async(req, res) => {
+  try {
+    const Tasks = await Task.findAll();
+    if(!Tasks) {
+      res.send("no hay tareas")
+    }
+    res.send(Tasks) 
+  } catch (error) {
+    console.log(`error al obtener las tareas: ${error}`);
+    
+  }
+}
+
+export const getAllTasksUser = async(req, res) => {
+  try {
+    authenticateToken(req, res, async() => {
+      const tasks = await Task.findAll({where: {
+        userId: req.user.id
+      }})
+      res.status(200).send(tasks)
+    })
+  } catch (error) {
+    console.log(error);
+    
+  }
+}
+
+export const deleteTasks = async(req, res) => {
+  authenticateToken(req, res, async() => {
+    const {id} = req.params;
+
+    const taskToDelete = await Task.findOne({
+      where: {
+        id: id,
+        userId: req.user.id, 
+      },
+    });
+
+    if (!taskToDelete) {
+      return res.status(404).json({ message: "Task not found" });
+    }
+
+    await taskToDelete.destroy();
+    res.send(`task ${taskToDelete.title} deleted`)
+  })
+}
