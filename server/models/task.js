@@ -1,5 +1,6 @@
 import { DataTypes } from 'sequelize' 
 import {sequelize} from '../database/dbConnection.js'
+import User from './user.js';
 
 
 const Task = sequelize.define(

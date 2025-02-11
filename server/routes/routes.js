@@ -1,10 +1,15 @@
 import express from 'express'
 const router = express.Router();
-import { createUser, loginUser } from '../controllers/controller.js'
+import { createUser, loginUser, createTask } from '../controllers/controller.js'
 
 
-router.post('/create', createUser)
+// routes user
+router.post('/create' , createUser)
 router.post('/login', loginUser)
+router.post('/createTask', createTask)
+
+
+// routes task
 
 
 export default router;
