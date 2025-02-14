@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "nodemon index.js",
+   "sequelize": "npx sequelize-cli --url 'mysql://deiiivy:2006@localhost:3306/project_management'"
   },
   "keywords": [],
   "author": "",

@@ -1,0 +1,10 @@
+{
+  "development": {
+    "username": "deiiivy",
+    "password": "2006",
+    "database": "project_management",
+    "host": "localhost",
+    "dialect": "mysql"
+  }
+}
+
