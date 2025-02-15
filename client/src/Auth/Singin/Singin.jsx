@@ -7,10 +7,12 @@ import { useAuth } from '../../utils/AuthContext';
 function Singin() {
     const [name, setName] = useState('');
     const [password, setPassword] = useState('')
+    const [error, setError] = useState('')
     const { login } = useAuth();
 
     const singin = async (e) => {
         e.preventDefault();
+        setError('');
 
         try {
             const response = await fetch('http://localhost:3000/projectManagement/create', {
@@ -18,14 +20,14 @@ function Singin() {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ name, password })
             });
-            setName('')
-            setPassword('')
 
             if (response.ok) {
-                login();  
-                console.log('Usuario creado exitosamente');
+                login();                  console.log('Usuario creado exitosamente');
+                setName('')
+                setPassword('')
             } else {
                 console.log('Error al crear usuario');
+                setError('Error al crear usuario')
             }
         } catch (error) {
             console.log('error al crear usuario: ' + error);  
@@ -33,13 +35,14 @@ function Singin() {
     }
   return (
     <div className='Singin'>
-        <form onSubmit={singin}>
-            <h1>Sing In</h1>
+        <form className='Form' onSubmit={singin}>
+            <h1>Sing Up</h1>
 
             <div className='fields'>
-                <input type='text' value={name} placeholder='enter your name' onChange={(e) => setName(e.target.value)} />
-                <input type='text' value={password} placeholder='enter your password' onChange={(e) => setPassword(e.target.value)}  />
+                <input type='text' required value={name} placeholder='enter your name' onChange={(e) => setName(e.target.value)} />
+                <input type='text' required value={password} placeholder='enter your password' onChange={(e) => setPassword(e.target.value)}  />
 
+                {error && <p className="error-message">{error}</p>}
                 <button type='submit'>Sing In</button>
             </div>
             
