@@ -25,7 +25,8 @@ function Login() {
 
             if (response.ok) {
                 login();
-                localStorage.setItem('token', data.token); 
+                localStorage.setItem('token', data.token);
+              console.log(data)
                 console.log('Login exitoso');
                 navigate('/index');
                 setName('');

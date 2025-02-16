@@ -1,6 +1,6 @@
 import React from 'react'
 import './Singin.css'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import { useAuth } from '../../utils/AuthContext';
 
@@ -9,6 +9,7 @@ function Singin() {
     const [password, setPassword] = useState('')
     const [error, setError] = useState('')
     const { login } = useAuth();
+    const navigate = useNavigate()
 
     const singin = async (e) => {
         e.preventDefault();
@@ -23,6 +24,7 @@ function Singin() {
 
             if (response.ok) {
                 login();                  console.log('Usuario creado exitosamente');
+                navigate('/Login') 
                 setName('')
                 setPassword('')
             } else {
