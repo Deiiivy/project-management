@@ -1,18 +1,22 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import './CreateTask.css'; // Importamos el archivo de estilos
+import './CreateTask.css'; 
 
 function CreateTask() {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [message, setMessage] = useState('');
+  const [loading, setLoading] = useState(false); 
 
   const createTasks = async (e) => {
     e.preventDefault();
+    setMessage(''); 
+    setLoading(true); 
 
     const token = localStorage.getItem('token');
     if (!token) {
-      setMessage('No tienes autorización.');
+      setMessage('❌ No tienes autorización.');
+      setLoading(false);
       return;
     }
 
@@ -27,16 +31,23 @@ function CreateTask() {
       });
 
       const data = await response.json();
+      console.log('Respuesta del servidor:', data); 
 
       if (response.ok) {
-        setMessage('✅ Tasks create success.');
+        setMessage('✅ Task created successfully.');
+        
         setTitle('');
         setDescription('');
+
+        setTimeout(() => setMessage(''), 3000);
       } else {
-        setMessage(`❌ Error: ${data.message}`);
+        setMessage(`❌ Error: ${data.message || 'Ocurrió un error inesperado.'}`);
       }
     } catch (error) {
-      setMessage('❌ Error en la conexión con el servidor.');
+      console.error('Error en la solicitud:', error);
+      setMessage('❌ Error de conexión. Intenta nuevamente.');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -52,6 +63,7 @@ function CreateTask() {
             value={title} 
             onChange={(e) => setTitle(e.target.value)} 
             required
+            disabled={loading} 
           />
         </div>
         <div className="form-group">
@@ -60,15 +72,16 @@ function CreateTask() {
             value={description} 
             onChange={(e) => setDescription(e.target.value)} 
             required
+            disabled={loading} 
           />
         </div>
-        <button type="submit" className="submit-btn">Create tasks</button>
+        <button type="submit" className="submit-btn" disabled={loading}>
+          {loading ? 'Creating...' : 'Create task'}
+        </button>
       </form>
-      <Link to="/index" className="back-link">back to the list of tasks</Link>
+      <Link to="/index" className="back-link">Back to the list of tasks</Link>
     </div>
   );
 }
 
 export default CreateTask;
-
-

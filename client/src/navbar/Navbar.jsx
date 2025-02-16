@@ -14,12 +14,12 @@ function Navbar() {
             </div>
 
             <div className="nav-links">
-                <Link to="/">Home</Link>
 
                 {login ? (
                     <>
                         <Link to="/CreateTask">Create Task</Link>
                         <Link to="/index">Tasks</Link>
+                        <Link>Groups</Link>
                         <button onClick={logout} className="logout-btn">Logout</button>
                         
                     </>

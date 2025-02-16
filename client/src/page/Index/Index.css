@@ -1,0 +1,80 @@
+.Index {
+  max-width: 1080px;
+  margin: 40px auto;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  text-align: center;
+}
+
+
+.Tasks {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 10px;
+  list-style: none;
+  padding: 0;
+}
+
+.task {
+  background-color: #f8f9fa;
+  padding: 10px;
+  border-radius: 5px;
+  border-left: 5px solid #007bff;
+  text-align: left;
+  transition: transform 0.2s;
+}
+
+.task:hover {
+  transform: scale(1.02);
+}
+
+.task-title {
+  font-weight: bold;
+  font-size: 18px;
+  color: #333;
+}
+
+.task-description {
+  word-wrap: break-word; 
+  overflow-wrap: break-word;
+  white-space: normal; 
+  max-width: 100%; 
+}
+
+
+.btns {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+button {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.btnDelete {
+  background-color: #dc3545;
+  color: white;
+}
+
+.btnDelete:hover {
+  background-color: #c82333;
+}
+
+.btnUpdate {
+  background-color: #ffc107;
+  color: black;
+}
+
+.btnUpdate:hover {
+  background-color: #e0a800;
+}
+|

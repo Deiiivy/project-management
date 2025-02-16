@@ -7,22 +7,34 @@ import bcrypt from 'bcrypt'
 
 // create user
  
-export const createUser = async(req, res) => {
-  try {
-    
-        const {name, password} = req.body
-    const passwordHash = await bcrypt.hash(password, 12)
-    const newUser = await User.create({name: name, password: passwordHash})
-    await newUser.save();
-    res.send("user create success")
-    console.log("user create")
-   }
-    catch (error) {
-    console.log('error al crear usuario: ' + error)
-  }
+export const createUser = async (req, res) => {
+    try {
+        const { name, password } = req.body;
 
-}
- // login user
+        const existingUser = await User.findOne({ where: { name } });
+
+        if (existingUser) {
+            const match = await bcrypt.compare(password, existingUser.password);
+            if (match) {
+                return res.status(400).json({ message: "El usuario con esta contraseña ya existe" });
+            }
+        }
+
+        const passwordHash = await bcrypt.hash(password, 12);
+
+
+        const newUser = await User.create({ name, password: passwordHash });
+      await newUser.save()
+        res.status(201).json({ message: "Usuario creado con éxito" });
+
+    } catch (error) {
+        console.log("Error al crear usuario:", error);
+        res.status(500).json({ message: "Error interno del servidor" });
+    }
+};
+
+
+// login user
 export const loginUser = async(req, res) => {
   try {
 
@@ -51,20 +63,34 @@ export const loginUser = async(req, res) => {
 }
 
 
-// create task
-export const createTask = async(req, res) => {
+// create tasks
+export const createTask = async (req, res) => {
   try {
-   authenticateToken(req, res, async() => {
-     const {title, description} = req.body
-     const newTask = await Task.create({title: title, description: description, userId: req.user.id })
-     await newTask.save();
-     res.send("Task created success")
-   })
+    await new Promise((resolve, reject) => {
+      authenticateToken(req, res, (error) => {
+        if (error) reject(error);
+        else resolve();
+      });
+    });
+
+    const { title, description } = req.body;
+
+    if (!title || !description) {
+      return res.status(400).json({ error: "Title and description are required" });
+    }
+
+    const newTask = await Task.create({
+      title,
+      description,
+      userId: req.user.id,
+    });
+
+    res.status(201).json({ message: "Task created successfully", task: newTask });
   } catch (error) {
-    res.send("error al crear tarea: "+ error)
-    console.log(`error al crear tarea: ${error}`)
+    console.error(`Error al crear tarea: ${error}`);
+    res.status(500).json({ error: "Error al crear tarea" });
   }
-}
+};
 
 // getAllTasks
 
@@ -95,22 +121,34 @@ export const getAllTasksUser = async(req, res) => {
   }
 }
 
-export const deleteTasks = async(req, res) => {
-  authenticateToken(req, res, async() => {
-    const {id} = req.params;
+export const deleteTasks = async (req, res) => {
+  try {
+    authenticateToken(req, res, async () => {
+      console.log("ID recibido:", req.params.id);
+      console.log("Usuario autenticado:", req.user.id);
 
-    const taskToDelete = await Task.findOne({
-      where: {
-        id: id,
-        userId: req.user.id, 
-      },
+      const { id } = req.params;
+
+      if (!id) {
+        return res.status(400).json({ message: "❌ ID requerido" });
+      }
+
+      const taskToDelete = await Task.findOne({
+        where: {
+          id: id,
+          userId: req.user.id, 
+        },
+      });
+
+      if (!taskToDelete) {
+        return res.status(404).json({ message: "❌ Task not found" });
+      }
+
+      await taskToDelete.destroy();
+      res.json({ message: `✅ Task '${taskToDelete.title}' deleted` });
     });
-
-    if (!taskToDelete) {
-      return res.status(404).json({ message: "Task not found" });
-    }
-
-    await taskToDelete.destroy();
-    res.send(`task ${taskToDelete.title} deleted`)
-  })
-}
+  } catch (error) {
+    console.error("Error al eliminar tarea:", error);
+    res.status(500).json({ message: "❌ Error interno del servidor" });
+  }
+};
