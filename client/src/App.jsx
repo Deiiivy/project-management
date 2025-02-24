@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import './App.css'
 import { BrowserRouter as Router, Routes,Route } from 'react-router-dom';
 import Home from './Home/Home';
@@ -9,7 +8,7 @@ import ProtectedRoute from './utils/ProtectedRoute';
 import { AuthProvider } from './utils/AuthContext';
 import CreateTask from './page/createTask/CreateTask.jsx';
 import Navbar from './navbar/Navbar.jsx';
-
+import IndexGroup from './groups/indexGroup/IndexGroup.jsx';
 
 function App() {
   return (
@@ -24,6 +23,7 @@ function App() {
           <Route path="/singin" element={<Singin />} />
           <Route path="/index" element={<ProtectedRoute element={<Index />} />} />
           <Route path='/CreateTask' element={<ProtectedRoute element={<CreateTask />} />} />
+          <Route path='/Group' element={<ProtectedRoute element={<IndexGroup />} />} />
         </Routes>
       </div>
     </Router>

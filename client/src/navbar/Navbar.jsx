@@ -4,7 +4,7 @@ import { useAuth } from '../utils/AuthContext';
 import './Navbar.css';
 
 function Navbar() {
-    const { login } = useAuth();
+    const { isAuthenticated, login } = useAuth();
     const { logout } = useAuth();
 
     return (
@@ -15,18 +15,18 @@ function Navbar() {
 
             <div className="nav-links">
 
-                {login ? (
+                {isAuthenticated ? (
                     <>
                         <Link to="/CreateTask">Create Task</Link>
                         <Link to="/index">Tasks</Link>
-                        <Link>Groups</Link>
+                        <Link to="/Group">Groups</Link>
                         <button onClick={logout} className="logout-btn">Logout</button>
                         
                     </>
                 ) : (
                     <>
                         <Link to="/login">Login</Link>
-                        <Link to="/register">Register</Link>
+                        <Link to="/Singin">Register</Link>
                     </>
                 )}
             </div>

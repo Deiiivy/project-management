@@ -24,8 +24,8 @@ function Login() {
             const data = await response.json();
 
             if (response.ok) {
-                login();
                 localStorage.setItem('token', data.token);
+               login(data.token);
               console.log(data)
                 console.log('Login exitoso');
                 navigate('/index');

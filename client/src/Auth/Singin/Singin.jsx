@@ -23,7 +23,8 @@ function Singin() {
             });
 
             if (response.ok) {
-                login();                  console.log('Usuario creado exitosamente');
+                login();
+              console.log('Usuario creado exitosamente');
                 navigate('/Login') 
                 setName('')
                 setPassword('')
