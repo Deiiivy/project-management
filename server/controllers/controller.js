@@ -11,27 +11,35 @@ export const createUser = async (req, res) => {
     try {
         const { name, password } = req.body;
 
-        const existingUser = await User.findOne({ where: { name } });
+        
+        const existingUserByName = await User.findOne({ where: { name } });
+        if (existingUserByName) {
+            return res.status(400).json({ message: "El usuario con este name ya existe" });
+        }
 
-        if (existingUser) {
-            const match = await bcrypt.compare(password, existingUser.password);
+      
+        const allUsers = await User.findAll(); 
+        for (let user of allUsers) {
+            const match = await bcrypt.compare(password, user.password);
             if (match) {
-                return res.status(400).json({ message: "El usuario con esta contraseña ya existe" });
+                return res.status(400).json({ message: "La contraseña ya está en uso por otro usuario" });
             }
         }
 
+      
         const passwordHash = await bcrypt.hash(password, 12);
 
-
         const newUser = await User.create({ name, password: passwordHash });
-      await newUser.save()
+        await newUser.save();
+
         res.status(201).json({ message: "Usuario creado con éxito" });
 
     } catch (error) {
-        console.log("Error al crear usuario:", error);
+        console.error("Error al crear usuario:", error);
         res.status(500).json({ message: "Error interno del servidor" });
     }
 };
+
 
 
 // login user
@@ -44,14 +52,13 @@ export const loginUser = async(req, res) => {
     })
 
     if(!user) {
-      res.status(500).send("User no found")
-      console.log("user no found")
+     return res.status(400).json({message: "user no found"})
     }
 
     const comparePasswords = await bcrypt.compare(password, user.password)
 
     if(!comparePasswords) {
-      return res.status(403).send("invalid password")
+      return res.status(403).json({ message: "invalid password" })
     }
     const token = jwt.sign({ id: user.id, name: user.name }, "miclave", { expiresIn: "1h" });
 

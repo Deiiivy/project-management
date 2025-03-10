@@ -7,6 +7,7 @@ import { useAuth } from '../../utils/AuthContext';
 function Singin() {
     const [name, setName] = useState('');
     const [password, setPassword] = useState('')
+    const [message, setMessage] =  useState('')
     const [error, setError] = useState('')
     const { login } = useAuth();
     const navigate = useNavigate()
@@ -22,15 +23,19 @@ function Singin() {
                 body: JSON.stringify({ name, password })
             });
 
+          const data = await response.json();
+
             if (response.ok) {
                 login();
               console.log('Usuario creado exitosamente');
                 navigate('/Login') 
                 setName('')
                 setPassword('')
+                setMessage(response.message)
             } else {
                 console.log('Error al crear usuario');
                 setError('Error al crear usuario')
+               setMessage(data.message)
             }
         } catch (error) {
             console.log('error al crear usuario: ' + error);  
@@ -43,9 +48,10 @@ function Singin() {
 
             <div className='fields'>
                 <input type='text' required value={name} placeholder='enter your name' onChange={(e) => setName(e.target.value)} />
-                <input type='text' required value={password} placeholder='enter your password' onChange={(e) => setPassword(e.target.value)}  />
+                <input type='password' required value={password} placeholder='enter your password' onChange={(e) => setPassword(e.target.value)}  />
 
                 {error && <p className="error-message">{error}</p>}
+                {message && <p className='message-backend'>{message}</p>}
                 <button type='submit'>Sing In</button>
             </div>
             
