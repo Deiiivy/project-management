@@ -9,17 +9,19 @@ import { AuthProvider } from './utils/AuthContext';
 import CreateTask from './page/createTask/CreateTask.jsx';
 import Navbar from './navbar/Navbar.jsx';
 import IndexGroup from './groups/indexGroup/IndexGroup.jsx';
+import { useState } from 'react';
 
 function App() {
+  const [user, setUser] = useState(null)
   return (
     <>
     <AuthProvider>
         <Router>
-    <Navbar />
+    <Navbar name={user} />
       <div>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/Login" element={<Login />} />
+          <Route path="/Login" element={<Login setUser={setUser} />} />
           <Route path="/singin" element={<Singin />} />
           <Route path="/index" element={<ProtectedRoute element={<Index />} />} />
           <Route path='/CreateTask' element={<ProtectedRoute element={<CreateTask />} />} />

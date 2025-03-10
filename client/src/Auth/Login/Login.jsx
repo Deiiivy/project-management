@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import './Login.css';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../utils/AuthContext';
+import Navbar from '../../navbar/Navbar.jsx'
 
-function Login() {
+function Login({setUser}) {
     const [name, setName] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
@@ -28,8 +29,9 @@ function Login() {
                login(data.token);
               console.log(data)
                 console.log('Login exitoso');
+              setUser(name);
                 navigate('/index');
-                setName('');
+               setName('');
                 setPassword('');
             } else {
                 setError(data.message || 'El usuario no existe'); 

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../utils/AuthContext';
 import './Navbar.css';
 
-function Navbar() {
+function Navbar({name}) {
     const { isAuthenticated, login } = useAuth();
     const { logout } = useAuth();
 
@@ -21,6 +21,7 @@ function Navbar() {
                         <Link to="/index">Tasks</Link>
                         <Link to="/Group">Groups</Link>
                         <button onClick={logout} className="logout-btn">Logout</button>
+                  <p className='userName'>{name}</p>
                         
                     </>
                 ) : (

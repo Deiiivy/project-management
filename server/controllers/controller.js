@@ -154,5 +154,11 @@ export const deleteTasks = async (req, res) => {
 };
  
 export const createGroup = async (req, res) => {
+  try {
+   authenticateToken(req, res, async() => {
 
+   }) 
+  } catch (error) {
+    
+  }
 }
