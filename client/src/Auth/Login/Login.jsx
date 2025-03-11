@@ -3,7 +3,6 @@ import './Login.css';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../utils/AuthContext';
 import Navbar from '../../navbar/Navbar.jsx'
-import { set } from 'mongoose';
 
 function Login({setUser}) {
     const [name, setName] = useState('');
