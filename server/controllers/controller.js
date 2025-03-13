@@ -162,10 +162,17 @@ export const deleteTasks = async (req, res) => {
  
 export const createGroup = async (req, res) => {
   try {
-   authenticateToken(req, res, async() => {
+    await new Promise((resolve, reject) => {
+      authenticateToken(req, res, (error) => {
+        if(error) reject(error)
+          else resolve()
+      })
+    })
 
-   }) 
-  } catch (error) {
-    
+    const {name} = req.body;
+
+  }catch (error) {
+    console.error(`Error al crear grupo: ${error}`);
+    res.status(500).json({ error: "Error al crear grupo" });
   }
 }
