@@ -1,6 +1,7 @@
 import User from '../models/user.js'
 import Task from '../models/task.js'
 import Group from '../models/group.js'
+import TaskGroup from '../models/taskgroup.js'
 import jwt from 'jsonwebtoken'
 import { authenticateToken } from '../middlewares/AuthMiddleware.js'
 import bcrypt from 'bcrypt'
@@ -115,6 +116,8 @@ export const getAllTasks = async(req, res) => {
   }
 }
 
+
+// get all task of the user
 export const getAllTasksUser = async(req, res) => {
   try {
     authenticateToken(req, res, async() => {
@@ -129,6 +132,7 @@ export const getAllTasksUser = async(req, res) => {
   }
 }
 
+// delete one task
 export const deleteTasks = async (req, res) => {
   try {
     authenticateToken(req, res, async () => {
@@ -160,7 +164,9 @@ export const deleteTasks = async (req, res) => {
     res.status(500).json({ message: "❌ Error interno del servidor" });
   }
 };
- 
+
+
+//create group
 export const createGroup = async (req, res) => {
   try {
     await new Promise((resolve, reject) => {
@@ -187,5 +193,37 @@ export const createGroup = async (req, res) => {
   }catch (error) {
     console.error(`Error al crear grupo: ${error}`);
     res.status(500).json({ error: "Error al crear grupo" });
+  }
+}
+
+//create task of the group
+export const createTaskGroup = async(req, res) => {
+  try {
+    await new Promise((resolve, reject) => {
+      authenticateToken(req, res, (error) => {
+        if(error) reject(error)
+          else resolve()
+      })
+    })
+
+    const {name, description, id_group} = req.body;
+    const id_user = req.user.id;
+
+    if (!name || !description) {
+      return res.status(400).json({ error: "El name de la tarea y la description  es obligatorio" });
+    }
+
+    const newTaskGroup = await TaskGroup.create({
+      id_group,
+      id_user,
+      name,
+      description,
+    })
+
+    res.status(201).json(newTaskGroup);
+
+  } catch (error) {
+    res.send('error, ' + error)
+    console.log('error ', + error)
   }
 }
