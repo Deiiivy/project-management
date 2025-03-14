@@ -227,3 +227,40 @@ export const createTaskGroup = async(req, res) => {
     console.log('error ', + error)
   }
 }
+
+
+//add guees to the group
+export const addGuessToGroup = async (req, res) => {
+  try {
+    await new Promise((resolve, reject) => {
+      authenticateToken(req, res, (error) => {
+        if (error) reject(error);
+        else resolve();
+      });
+    });
+
+    const { groupId, name } = req.body;
+
+    if (!groupId || !name) {
+      return res.status(400).json({ error: "Se requiere el ID del grupo y el nombre de usuario" });
+    }
+
+    const user = await User.findOne({ where: { name } });
+    if (!user) {
+      return res.status(404).json({ error: "Usuario no encontrado" });
+    }
+
+    const group = await Group.findByPk(groupId);
+    if (!group) {
+      return res.status(404).json({ error: "Grupo no encontrado" });
+    }
+
+    group.id_guess = user.id;
+    await group.save();
+
+    res.status(200).json({ message: "Usuario agregado al grupo exitosamente", group });
+  } catch (error) {
+    console.log("Error: " + error);
+    res.status(500).json({ error: "Error al agregar usuario al grupo" });
+  }
+};
