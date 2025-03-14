@@ -255,6 +255,7 @@ export const addGuessToGroup = async (req, res) => {
       return res.status(404).json({ error: "Grupo no encontrado" });
     }
 
+    
     group.id_guess = user.id;
     await group.save();
 
