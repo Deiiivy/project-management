@@ -1,7 +1,8 @@
 import User from '../models/user.js'
+import Task from '../models/task.js'
+import Group from '../models/group.js'
 import jwt from 'jsonwebtoken'
 import { authenticateToken } from '../middlewares/AuthMiddleware.js'
-import Task from '../models/task.js'
 import bcrypt from 'bcrypt'
 
 
@@ -170,6 +171,18 @@ export const createGroup = async (req, res) => {
     })
 
     const {name} = req.body;
+    const userId = req.user.id;
+
+    if (!name) {
+      return res.status(400).json({ error: "El nombre del grupo es obligatorio" });
+    }
+
+    const newGroup = await Group.create({
+      name,
+      id_creator: userId, 
+    });
+
+    res.status(201).json(newGroup);
 
   }catch (error) {
     console.error(`Error al crear grupo: ${error}`);
