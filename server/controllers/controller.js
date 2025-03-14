@@ -206,17 +206,18 @@ export const createTaskGroup = async(req, res) => {
       })
     })
 
-    const {title, description} = req.body;
-    const userId = req.user.id;
+    const {name, description, id_group} = req.body;
+    const id_user = req.user.id;
 
-    if (!title || !description) {
-      return res.status(400).json({ error: "El title de la tarea y la description  es obligatorio" });
+    if (!name || !description) {
+      return res.status(400).json({ error: "El name de la tarea y la description  es obligatorio" });
     }
 
     const newTaskGroup = await TaskGroup.create({
-      title,
+      id_group,
+      id_user,
+      name,
       description,
-      userId
     })
 
     res.status(201).json(newTaskGroup);
