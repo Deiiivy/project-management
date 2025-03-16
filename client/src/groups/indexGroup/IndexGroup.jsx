@@ -2,7 +2,12 @@ import React from 'react'
 
 function IndexGroup() {
   return (
-    <div>IndexGroup</div>
+    <div className='IndexGroup'>
+
+    <button className='btnCrearGrupo'>Crear un grupo</button>
+    <button className='btnVerGrupos'>Ver grupos</button>
+
+    </div>
   )
 }
 

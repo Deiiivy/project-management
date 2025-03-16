@@ -9,7 +9,10 @@ import { AuthProvider } from './utils/AuthContext';
 import CreateTask from './page/createTask/CreateTask.jsx';
 import Navbar from './navbar/Navbar.jsx';
 import IndexGroup from './groups/indexGroup/IndexGroup.jsx';
+import CreateGroup from './groups/createGroup/CreateGroup.jsx'
 import { useState } from 'react';
+import Footer from './footer/Footer.jsx';
+
 
 function App() {
   const [user, setUser] = useState(null)
@@ -26,8 +29,10 @@ function App() {
           <Route path="/index" element={<ProtectedRoute element={<Index />} />} />
           <Route path='/CreateTask' element={<ProtectedRoute element={<CreateTask />} />} />
           <Route path='/Group' element={<ProtectedRoute element={<IndexGroup />} />} />
+          <Route path='/CreateGroup' element={<ProtectedRoute element={<CreateGroup />} />} />
         </Routes>
       </div>
+        <Footer />
     </Router>
     </AuthProvider>
     </>

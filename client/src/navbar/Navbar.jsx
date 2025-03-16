@@ -18,6 +18,7 @@ function Navbar({name}) {
                 {isAuthenticated ? (
                     <>
                         <Link to="/CreateTask">Create Task</Link>
+                        <Link to="/CreateGroup">Create Group</Link>
                         <Link to="/index">Tasks</Link>
                         <Link to="/Group">Groups</Link>
                         <button onClick={logout} className="logout-btn">Logout</button>
