@@ -7,43 +7,77 @@ function CreateGroup() {
   const [username, setUsername] = useState('');
     const [message, setMessage] = useState('');
 
+
+    //endpoint crear grupo
   const createGroup = async(e) => {
     e.preventDefault();
-    const token = localStorage.getItem('token');
-    if(!token) {
-      setMessage('❌ No tienes autorización.');
+    const token = localStorage.getItem("token");
+    if (!token) {
+      setMessage("❌ No tienes autorización.");
       return;
     }
-
+  
     try {
-     const response = await fetch('http://localhost:3000/projectManagement/createGroup', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`,
-      },
-      body: JSON.stringify({name, username})
-     })
-
-     const data = await response.json();
-     console.log('respuesta del servidor: ', data);
-
-     if(response.ok) {
-      setMessage('✅ Group created successfully.');
-      
-      setName('');
-      setUsername('');
-
-      setTimeout(() => setMessage(''), 3000);
-     }else {
-      setMessage(`❌ Error: ${data.message || 'Ocurrió un error inesperado.'}`);
-     }
-     
+      const response = await fetch(
+        "http://localhost:3000/projectManagement/createGroup",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ name, username }),
+        }
+      );
+  
+      const data = await response.json();
+      console.log("Respuesta del servidor:", data);
+  
+      if (response.ok) {
+        setMessage("✅ Grupo creado con éxito.");
+  
+        const groupId = data.id; 
+  
+        if (!groupId) {
+          setMessage("❌ Error: No se recibió el ID del grupo.");
+          return;
+        }
+  
+        const response2 = await fetch(
+          "http://localhost:3000/projectManagement/addGuessToGroup",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify({ groupId, name: username }) 
+          }
+        );
+  
+        const data2 = await response2.json();
+        console.log("Respuesta del servidor (addGuessToGroup):", data2);
+  
+        if (response2.ok) {
+          setMessage("✅ Invitado agregado al grupo con éxito.");
+        } else {
+          setMessage(`❌ Error al agregar invitado: ${data2.message || "Error desconocido."}`);
+        }
+  
+        setName("");
+        setUsername("");
+  
+        setTimeout(() => setMessage(""), 3000);
+      } else {
+        setMessage(`❌ Error: ${data.message || "Ocurrió un error inesperado."}`);
+      }
     } catch (error) {
-      console.error('Error en la solicitud:', error);
-      setMessage('❌ Error de conexión. Intenta nuevamente.');
+      console.error("Error en la solicitud:", error);
+      setMessage("❌ Error de conexión. Intenta nuevamente.");
     }
   }
+
+
 
   return (
     <div className='CreateGroup'>
@@ -66,7 +100,7 @@ function CreateGroup() {
             required
           />
         </div>
-        <button type="submit" className="submit-btn">
+      <button type="submit" className="submit-btn">
           Create
         </button>
       </form>

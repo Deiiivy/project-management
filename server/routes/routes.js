@@ -1,7 +1,7 @@
 import express from 'express'
 const router = express.Router();
 import { createUser, loginUser, createTask, getAllTasks, getAllTasksUser, 
-deleteTasks, createGroup, createTaskGroup, addGuessToGroup } 
+deleteTasks, createGroup, createTaskGroup, addGuessToGroup, getAllGroupsOfUser } 
 from '../controllers/controller.js'
 
 
@@ -21,5 +21,6 @@ router.delete('/deleteTask/:id', deleteTasks)
 router.post('/createGroup', createGroup)
 router.post('/createTaskGroup', createTaskGroup)
 router.post('/addGuessToGroup', addGuessToGroup)
+router.get('/getAllGroupsOfUser', getAllGroupsOfUser)
 
 export default router;

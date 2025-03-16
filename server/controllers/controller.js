@@ -265,3 +265,20 @@ export const addGuessToGroup = async (req, res) => {
     res.status(500).json({ error: "Error al agregar usuario al grupo" });
   }
 };
+
+
+//get all groups of the user
+
+export const getAllGroupsOfUser = async(req, res) => {
+  try {
+    authenticateToken(req, res, async() => {
+      const groups = await Group.findAll({where: {
+        id_creator: req.user.id
+      }})
+      res.status(200).send(groups)
+    })
+  } catch (error) {
+    console.log(error);
+    
+  }
+}

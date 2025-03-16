@@ -1,0 +1,36 @@
+  .IndexGroup {
+    max-width: 820px;
+    margin: 50px auto;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;  
+}
+  
+  .IndexGroup h2 {
+    margin-bottom: 10px;
+  }
+  
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  
+  .container-groups {
+    background: #f3f4f6;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    transition: transform 0.2s;
+    border-left: 5px solid #007bff;
+    background: linear-gradient(90deg in oklab, rgb(116, 211, 166), rgb(132, 176, 206));
+    font-size: 12px;
+    margin: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .container-groups:hover {
+    transform: scale(1.02);
+    cursor: pointer;
+  }
+  
