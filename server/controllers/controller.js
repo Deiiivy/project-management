@@ -5,6 +5,7 @@ import TaskGroup from '../models/taskgroup.js'
 import jwt from 'jsonwebtoken'
 import { authenticateToken } from '../middlewares/AuthMiddleware.js'
 import bcrypt from 'bcrypt'
+import { Op } from "sequelize";
 
 
 // create user
@@ -269,16 +270,24 @@ export const addGuessToGroup = async (req, res) => {
 
 //get all groups of the user
 
-export const getAllGroupsOfUser = async(req, res) => {
+
+export const getAllGroupsOfUser = async (req, res) => {
   try {
-    authenticateToken(req, res, async() => {
-      const groups = await Group.findAll({where: {
-        id_creator: req.user.id
-      }})
-      res.status(200).send(groups)
-    })
+    authenticateToken(req, res, async () => {
+      const groups = await Group.findAll({
+        where: {
+          [Op.or]: [
+            { id_creator: req.user.id }, 
+            { id_guess: req.user.id }   
+          ]
+        }
+      });
+
+      res.status(200).json(groups);
+    });
   } catch (error) {
-    console.log(error);
-    
+    console.log("Error al obtener los grupos: ", error);
+    res.status(500).json({ error: "Error al obtener los grupos" });
   }
-}
+};
+
