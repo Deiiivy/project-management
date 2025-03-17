@@ -3,3 +3,12 @@
   margin: 0;
   box-sizing: border-box;
 }
+
+:root {
+  --background-forms: linear-gradient(135deg, #1f1c2c, #8695aa);
+}
+
+body {
+  background-image: url(assets/5297078.jpg);
+  background-size: cover;
+}
