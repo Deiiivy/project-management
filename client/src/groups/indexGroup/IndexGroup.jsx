@@ -39,7 +39,7 @@ function IndexGroup() {
   },[])
   return (
 <div className="IndexGroup">
-  <h2>Tus Grupos</h2>
+  <h2>Groups</h2>
   <div className="grid-container">
     {groups.map((group, index) => (
       <div className="container-groups" key={index}>
