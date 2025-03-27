@@ -30,7 +30,7 @@ function App() {
           <Route path='/CreateTask' element={<ProtectedRoute element={<CreateTask />} />} />
           <Route path='/Group' element={<ProtectedRoute element={<IndexGroup />} />} />
           <Route path='/CreateGroup' element={<ProtectedRoute element={<CreateGroup />} />} />
-          <Route path='/UpdateTask' element={<ProtectedRoute element={<UpdateTask />} />} />
+          <Route path='/UpdateTask/:id' element={<ProtectedRoute element={<UpdateTask />} />} />
         </Routes>
       </div>
         <Footer />

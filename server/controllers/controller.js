@@ -6,8 +6,7 @@ import jwt from 'jsonwebtoken'
 import { authenticateToken } from '../middlewares/AuthMiddleware.js'
 import bcrypt from 'bcrypt'
 import { Op, where } from "sequelize";
-import Task from '../models/task.js'
-import Task from '../models/task.js'
+
 
 
 // create user
@@ -297,30 +296,60 @@ export const getAllGroupsOfUser = async (req, res) => {
 export const UpdateTask = async (req, res) => {
   try {
     authenticateToken(req, res, async () => {
-        const { id } = req.params;
+      const { id } = req.params;
+      const { title, description } = req.body;
 
-        if(!id) {
-          console.log("El id seleccionado no existe")
-          res.status(400).json({ message: "El id seleccionado no existe" })
-        }
-
-      const Task = await Task.findOne({
-        where: {
-          id: id,
-          idUser = req.user.id
-        }
-      })
-
-      const updateDataTask = {
-
+      if (!id) {
+        return res.status(400).json({ message: "El id seleccionado no existe" });
       }
 
-      })
-    })
+      
+      const task = await Task.findOne({
+        where: { id: id, userId: req.user.id },
+      });
 
+      if (!task) {
+        return res.status(404).json({ message: "Tarea no encontrada o no tienes permiso para editarla" });
+      }
+
+      console.log("Antes de actualizar:", task.dataValues);
+
+      console.log("Datos recibidos en req.body:", req.body);
+
+    
+      await task.update({
+        title: title || task.title,
+        description: description || task.description,
+      });
+
+      console.log("Después de actualizar:", task.dataValues);
+
+      
+      return res.status(200).json({
+        message: "Tarea actualizada con éxito.",
+        task: task.dataValues,
+      });
+    });
   } catch (error) {
-    console.log("Error al actualizar la tarea: ", error)
-    res.status(500).json({error: "error al actualizar la tarea;
-    "})
+    console.error("Error al actualizar la tarea: ", error);
+    return res.status(500).json({ error: "Error al actualizar la tarea." });
   }
-}
+};
+
+
+
+export const getTaskById = async (req, res) => {
+  try {
+    const task = await Task.findByPk(req.params.id); 
+    if (!task) {
+      return res.status(404).json({ message: "Tarea no encontrada" });
+    }
+    res.json(task);
+  } catch (error) {
+    console.error("Error al obtener la tarea:", error);
+    res.status(500).json({ message: "Error al obtener la tarea" });
+  }
+};
+
+
+

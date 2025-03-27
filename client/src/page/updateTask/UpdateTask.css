@@ -1,0 +1,76 @@
+.update-task-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+
+.update-task-box {
+  background: #161b22;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(255, 255, 255, 0.1);
+  width: 400px;
+  text-align: center;
+  border: 1px solid #30363d;
+}
+
+.update-task-title {
+  font-size: 1.8rem;
+  color: #e6edf3;
+  margin-bottom: 1rem;
+}
+
+
+.update-task-form {
+  display: flex;
+  flex-direction: column;
+}
+
+
+.update-task-label {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #c9d1d9;
+  margin-top: 1rem;
+  text-align: left;
+}
+
+
+.update-task-input,
+.update-task-textarea {
+  width: 100%;
+  padding: 0.8rem;
+  margin-top: 0.3rem;
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  font-size: 1rem;
+  background: #0d1117;
+  color: #e6edf3;
+  outline: none;
+}
+
+.update-task-textarea {
+  height: 100px;
+  resize: none;
+}
+
+
+.update-task-button {
+  margin-top: 1.5rem;
+  background: #238636;
+  color: white;
+  font-size: 1rem;
+  padding: 0.8rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+}
+
+
+.update-task-button:hover {
+  background: #2ea043;
+}
+

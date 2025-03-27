@@ -1,7 +1,7 @@
 import express from 'express'
 const router = express.Router();
 import { createUser, loginUser, createTask, getAllTasks, getAllTasksUser, 
-deleteTasks, createGroup, createTaskGroup, addGuessToGroup, getAllGroupsOfUser } 
+deleteTasks, createGroup, createTaskGroup, addGuessToGroup, getAllGroupsOfUser,UpdateTask,getTaskById } 
 from '../controllers/controller.js'
 
 
@@ -10,13 +10,13 @@ router.post('/create' , createUser)
 router.post('/login', loginUser)
 
 
-
 // routes task
 router.post('/createTask', createTask)
 router.get('/getAllTasks', getAllTasks)
 router.get('/getTasksUser', getAllTasksUser)
 router.delete('/deleteTask/:id', deleteTasks)
-
+router.put('/updateTask/:id', UpdateTask);
+router.get('/getTask/:id', getTaskById);
 
 // routes group
 router.post('/createGroup', createGroup)

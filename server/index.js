@@ -8,7 +8,6 @@ import router from './routes/routes.js'
 dotenv.config();
 
 const app = express();
-const route = express.Router();
 
 // middlewares
 
@@ -32,8 +31,12 @@ connect().then(async (connection) => {
 app.use('/projectManagement', router)
 
   
-app.get('/', function() {
+app.get('/', (req, res) => {
   res.send('hello word')
+})
+
+app.get('/nuevaruta', (req, res) => {
+  res.send('hola')
 })
 
 app.listen(PORT, () => {
