@@ -5,7 +5,9 @@ import TaskGroup from '../models/taskgroup.js'
 import jwt from 'jsonwebtoken'
 import { authenticateToken } from '../middlewares/AuthMiddleware.js'
 import bcrypt from 'bcrypt'
-import { Op } from "sequelize";
+import { Op, where } from "sequelize";
+import Task from '../models/task.js'
+import Task from '../models/task.js'
 
 
 // create user
@@ -291,3 +293,34 @@ export const getAllGroupsOfUser = async (req, res) => {
   }
 };
 
+
+export const UpdateTask = async (req, res) => {
+  try {
+    authenticateToken(req, res, async () => {
+        const { id } = req.params;
+
+        if(!id) {
+          console.log("El id seleccionado no existe")
+          res.status(400).json({ message: "El id seleccionado no existe" })
+        }
+
+      const Task = await Task.findOne({
+        where: {
+          id: id,
+          idUser = req.user.id
+        }
+      })
+
+      const updateDataTask = {
+
+      }
+
+      })
+    })
+
+  } catch (error) {
+    console.log("Error al actualizar la tarea: ", error)
+    res.status(500).json({error: "error al actualizar la tarea;
+    "})
+  }
+}

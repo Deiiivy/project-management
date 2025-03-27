@@ -10,9 +10,9 @@ import CreateTask from './page/createTask/CreateTask.jsx';
 import Navbar from './navbar/Navbar.jsx';
 import IndexGroup from './groups/indexGroup/IndexGroup.jsx';
 import CreateGroup from './groups/createGroup/CreateGroup.jsx'
-import { useState } from 'react';
 import Footer from './footer/Footer.jsx';
-
+import UpdateTask from './page/updateTask/UpdateTask.jsx';
+import { useState } from 'react';
 
 function App() {
   const [user, setUser] = useState(null)
@@ -30,6 +30,7 @@ function App() {
           <Route path='/CreateTask' element={<ProtectedRoute element={<CreateTask />} />} />
           <Route path='/Group' element={<ProtectedRoute element={<IndexGroup />} />} />
           <Route path='/CreateGroup' element={<ProtectedRoute element={<CreateGroup />} />} />
+          <Route path='/UpdateTask' element={<ProtectedRoute element={<UpdateTask />} />} />
         </Routes>
       </div>
         <Footer />

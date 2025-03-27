@@ -67,7 +67,7 @@ function Index() {
       <li className='task-description'>{task.description}</li>
       <div className='btns'>
       <button onClick={() => deleteTask(task.id)} className='btnDelete'>Delete</button>
-      <button className='btnUpdate'>Update</button>
+      <Link to="/UpdateTask" className='btnUpdate'>Update</Link>
     </div>
       </div>
     ))}
