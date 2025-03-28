@@ -12,7 +12,7 @@ function Singin() {
     const { login } = useAuth();
     const navigate = useNavigate()
 
-    const singin = async (e) => {
+    const register = async (e) => {
         e.preventDefault();
         setError('');
 
@@ -43,8 +43,8 @@ function Singin() {
     }
   return (
     <div className='Singin'>
-        <form className='Form' onSubmit={singin}>
-            <h1>Sing Up</h1>
+        <form className='Form' onSubmit={register}>
+            <h1>Register</h1>
 
             <div className='fields'>
                 <input type='text' required value={name} placeholder='enter your name' onChange={(e) => setName(e.target.value)} />
@@ -52,7 +52,7 @@ function Singin() {
 
                 {error && <p className="error-message">{error}</p>}
                 {message && <p className='message-backend'>{message}</p>}
-                <button type='submit'>Sing In</button>
+                <button type='submit'>Register</button>
             </div>
             
             <Link to="/login">You have a account? </Link>

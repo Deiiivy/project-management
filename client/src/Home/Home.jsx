@@ -10,7 +10,7 @@ export default function Home() {
         </div>
         <section className='links'>
             <Link to="/login">Login</Link>
-            <Link to="/singin">Sing in</Link>
+            <Link to="/singin">Register</Link>
         </section>
     </div>
   )
