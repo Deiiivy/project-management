@@ -12,6 +12,7 @@ import IndexGroup from './groups/indexGroup/IndexGroup.jsx';
 import CreateGroup from './groups/createGroup/CreateGroup.jsx'
 import Footer from './footer/Footer.jsx';
 import UpdateTask from './page/updateTask/UpdateTask.jsx';
+import IndexTask from './groups/indexTask/IndexTask.jsx'
 import { useState } from 'react';
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
           <Route path='/Group' element={<ProtectedRoute element={<IndexGroup />} />} />
           <Route path='/CreateGroup' element={<ProtectedRoute element={<CreateGroup />} />} />
           <Route path='/UpdateTask/:id' element={<ProtectedRoute element={<UpdateTask />} />} />
+          <Route path='/IndexTask' element={<ProtectedRoute element={<IndexTask />} />} />
         </Routes>
       </div>
         <Footer />

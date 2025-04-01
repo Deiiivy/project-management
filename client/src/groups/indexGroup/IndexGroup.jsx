@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { useState } from 'react'
+import { Link } from 'react-router-dom';
 import './IndexGroup.css'
 
 function IndexGroup() {
@@ -42,9 +43,9 @@ function IndexGroup() {
   <h2>Groups</h2>
   <div className="grid-container">
     {groups.map((group, index) => (
-      <div className="container-groups" key={index}>
+      <Link to="/IndexTask" className="container-groups" key={index}>
         <h1>{group.name}</h1>
-      </div>
+      </Link>
     ))}
   </div>
 </div>
