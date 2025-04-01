@@ -1,13 +1,34 @@
 .Footer {
+    background-color: #181818;
+    color: #ffffff;
+    text-align: center;
+    padding: 20px;
     position: fixed;
     bottom: 0;
+    left: 0;
     width: 100%;
-    background-color: #333; 
-    color: white;
-    text-align: center;
-    padding: 10px 0;
-}
+    box-shadow: 0 -6px 15px rgba(0, 0, 0, 0.3);
+    font-family: 'Poppins', sans-serif;
+    z-index: 10;  
+  }
+  
+  .Footer h2 {
+    font-size: 1.5rem;
+    color: #ffcc00;
+    font-weight: 600;
+    letter-spacing: 2px;
+    margin: 0;
+    text-transform: uppercase;
+    transition: color 0.3s ease;
+  }
 
-.Footer h2 {
-    color: #ffff;
-}
+  .Footer h2:hover {
+    color: #ff9800;
+  }
+  
+  @media (max-width: 600px) {
+    .Footer h2 {
+      font-size: 1.2rem;
+    }
+  }
+  

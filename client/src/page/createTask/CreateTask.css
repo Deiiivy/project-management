@@ -1,69 +1,98 @@
+
 .create-task-container {
-  max-width: 400px;
-  margin: 50px auto;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  background-color: #ffffff;
+  max-width: 450px;
+  margin: 60px auto;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
   text-align: center;
+  color: white;
+  animation: fadeIn 0.5s ease-in-out;
 }
 
 h2 {
-  color: #333;
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  text-transform: uppercase;
 }
 
 .message {
   font-size: 14px;
-  color: #d32f2f;
-  margin-bottom: 10px;
+  color: #ff4d4d;
+  margin-bottom: 15px;
+  animation: fadeIn 0.3s ease-in-out;
 }
 
 .task-form {
   display: flex;
   flex-direction: column;
+  gap: 15px;
 }
 
 .form-group {
-  margin-bottom: 15px;
   text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 
 .form-group label {
   font-weight: bold;
-  display: block;
+  font-size: 14px;
 }
 
 .form-group input,
 .form-group textarea {
   width: 100%;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
   font-size: 16px;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  transition: 0.3s;
+  outline: none;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.02);
 }
 
 .submit-btn {
-  background-color: #28a745;
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
   color: white;
-  border: none;
-  padding: 10px;
-  border-radius: 4px;
+  padding: 12px;
   font-size: 16px;
+  border: none;
+  border-radius: 8px;
   cursor: pointer;
+  transition: 0.3s;
 }
 
 .submit-btn:hover {
-  background-color: #218838;
+  background: linear-gradient(135deg, #5215c5, #2064db);
+  transform: translateY(-2px);
 }
 
 .back-link {
-  display: block;
-  margin-top: 10px;
-  color: #007bff;
+  margin-top: 15px;
+  display: inline-block;
+  color: #61dafb;
   text-decoration: none;
+  transition: 0.3s;
 }
 
 .back-link:hover {
   text-decoration: underline;
+  transform: scale(1.05);
 }
 
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}

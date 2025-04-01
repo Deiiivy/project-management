@@ -1,61 +1,104 @@
 .Singin {
-    background: linear-gradient(135deg, #1f1c2c, #928dab);
-    color: white;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    font-family: 'Poppins', sans-serif;
+    min-height: 100vh;
+    background-color: #1e1e2f;
+    padding: 20px;
+  }
+  
+  .Form {
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 450px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+  }
+  
+  .Form:hover {
+    transform: translateY(-5px);
+  }
+  
+  h1 {
     text-align: center;
-    overflow: hidden;
-}
-
-.Form {
-    background: var(--background-forms);
-    margin: 10px auto;
-    width: 500px;
-    height: 300px;
-    color: black;
-    padding: 10px 20px 10px 20px;
-    border-radius: 18px;
-}
-
-.fields{
+    font-size: 28px;
+    color: #333333;
+    margin-bottom: 30px;
+  }
+  
+  .fields {
     display: flex;
     flex-direction: column;
-}
-
-.fields input {
-    margin: 12px;
-    padding: 10px;
-    border-radius: 8px;
-    border: none;
-    border: 1px solid #000;
-}
-
-.Form button {
-    margin-top: 20px;
-    padding: 5px 14px 5px 14px;
-    text-decoration: none;
-    font-size: 1.2rem;
-    font-weight: bold;
+    gap: 20px;
+  }
+  
+  input {
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #dcdfe6;
+    border-radius: 5px;
+    outline: none;
+    background-color: #f4f7fc;
+    color: #333333;
+    transition: border 0.3s ease;
+  }
+  
+  input:focus {
+    border: 1px solid #2575fc;
+  }
+  
+  button {
+    padding: 14px;
+    font-size: 16px;
+    font-weight: 600;
     color: white;
-    background: linear-gradient(45deg, #ff758c, #ff7eb3);
-    border-radius: 8px;
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-    box-shadow: 0px 5px 15px rgba(255, 120, 150, 0.3);
-    position: relative;
-    overflow: hidden;
-}
-
-.error-message {
-    color: red;
+    background-color: #2575fc;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #1e5cb8;
+    transform: scale(1.05);
+  }
+  
+  button:active {
+    transform: scale(0.98);
+  }
+  
+  .error-message {
+    color: #ff4b5c;
     font-size: 14px;
-    margin-top: 5px;
-}
-
-.message-backend {
-  color: red;
-  font-size: 14px;
-}
+    text-align: center;
+  }
+  
+  .message-backend {
+    color: #28a745;
+    font-size: 14px;
+    text-align: center;
+  }
+  
+  a {
+    text-align: center;
+    color: #2575fc;
+    display: block;
+    margin-top: 15px;
+    font-size: 14px;
+    text-decoration: none;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
+  
+  @media (max-width: 768px) {
+    .Form {
+      width: 90%;
+      padding: 20px;
+    }
+  }
+  

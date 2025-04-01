@@ -1,55 +1,99 @@
 .Login {
-    background: linear-gradient(135deg, #1f1c2c, #928dab);
-    color: white;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    font-family: 'Poppins', sans-serif;
+    min-height: 100vh;
+    background-color: #1e1e2f; 
+    padding: 20px;
+  }
+  
+  .Form {
+    background-color: #2b2b3a; 
+    padding: 40px;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+  }
+  
+  .Form:hover {
+    transform: translateY(-5px);
+  }
+  
+  h1 {
     text-align: center;
-    overflow: hidden;
-}
-
-.Form {
-    background-color: white;
-    color: black;
-    padding: 10px 20px 10px 20px;
-    border-radius: 18px;
-}
-
-.fields{
+    font-size: 24px;
+    color: #ffffff;
+    margin-bottom: 20px;
+  }
+  
+  .fields {
     display: flex;
     flex-direction: column;
-}
-
-.fields input {
-    margin: 12px;
+    gap: 20px;
+  }
+  
+  input {
     padding: 10px;
-    border-radius: 8px;
-    border: none;
-    border: 1px solid #000;
-}
-
-.Form button {
-    margin-top: 20px;
-    padding: 5px 14px 5px 14px;
-    text-decoration: none;
-    font-size: 1.2rem;
-    font-weight: bold;
+    font-size: 16px;
+    border: 1px solid #44475a;
+    border-radius: 5px;
+    outline: none;
+    background-color: #2b2b3a;
     color: white;
-    background: linear-gradient(45deg, #ff758c, #ff7eb3);
-    border-radius: 8px;
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-    box-shadow: 0px 5px 15px rgba(255, 120, 150, 0.3);
-    position: relative;
-    overflow: hidden;
-}
-
-.error-message {
-    color: red;
+    transition: border 0.3s ease;
+  }
+  
+  input:focus {
+    border: 1px solid #0056b3;
+  }
+  
+  button {
+    padding: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+  }
+  
+  button:active {
+    transform: scale(0.98);
+  }
+  
+  .error-message {
+    color: #ff4b5c; 
     font-size: 14px;
-    margin-top: 5px;
-}
-
-
+    text-align: center;
+  }
+  
+  a {
+    text-align: center;
+    color: #007bff;
+    display: block;
+    margin-top: 10px;
+    font-size: 14px;
+    text-decoration: none;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Estilos Responsivos */
+  @media (max-width: 768px) {
+    .Form {
+      width: 90%;
+      padding: 20px;
+    }
+  }
+  

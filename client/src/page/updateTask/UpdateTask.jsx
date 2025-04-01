@@ -30,31 +30,30 @@ function UpdateTask() {
     setTask({ ...task, [e.target.name]: e.target.value });
   };
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  const token = localStorage.getItem("token"); 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const token = localStorage.getItem("token");
 
-  try {
-    const response = await fetch(`http://localhost:3000/projectManagement/updateTask/${id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`
-      },
-      body: JSON.stringify(task),
-    });
+    try {
+      const response = await fetch(`http://localhost:3000/projectManagement/updateTask/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`,
+        },
+        body: JSON.stringify(task),
+      });
 
-    if (!response.ok) throw new Error("Error actualizando la tarea");
+      if (!response.ok) throw new Error("Error actualizando la tarea");
 
-    navigate("/index");
-  } catch (error) {
-    console.error(error);
-  }
-};
+      navigate("/index");
+    } catch (error) {
+      setError(error.message);
+    }
+  };
 
-
-  if (loading) return <p>Cargando...</p>;
-  if (error) return <p>Error: {error}</p>;
+  if (loading) return <p className="loading">Cargando...</p>;
+  if (error) return <p className="error">Error: {error}</p>;
 
   return (
     <div className="update-task-wrapper">
@@ -86,4 +85,3 @@ const handleSubmit = async (e) => {
 }
 
 export default UpdateTask;
-
