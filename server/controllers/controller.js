@@ -293,6 +293,7 @@ export const getAllGroupsOfUser = async (req, res) => {
 };
 
 
+//update task
 export const UpdateTask = async (req, res) => {
   try {
     authenticateToken(req, res, async () => {
@@ -337,7 +338,7 @@ export const UpdateTask = async (req, res) => {
 };
 
 
-
+//get one task for id
 export const getTaskById = async (req, res) => {
   try {
     const task = await Task.findByPk(req.params.id); 
@@ -352,4 +353,39 @@ export const getTaskById = async (req, res) => {
 };
 
 
+// remove task of group
+export const deleteTaskOfGroup = async (req, res) => {
+  try {
+    await new Promise((resolve, reject) => {
+      authenticateToken(req, res, (err) => {
+        if (err) return reject(err);
+        resolve();
+      });
+    });
 
+    const { id, id_group } = req.params;
+
+    if (!id || !id_group) {
+      return res.status(400).json({ message: "❌ ID e ID del grupo requeridos" });
+    }
+
+    const taskToDelete = await TaskGroup.findOne({
+      where: {
+        id: parseInt(id, 10), 
+        id_group: parseInt(id_group, 10),  
+        id_user: req.user.id,
+      },
+    });
+
+    if (!taskToDelete) {
+      return res.status(404).json({ message: "❌ Task not found" });
+    }
+
+    await taskToDelete.destroy();
+    res.json({ message: `✅ Task '${taskToDelete.name}' deleted` });
+
+  } catch (error) {
+    console.error("Error al eliminar la tarea:", error);
+    res.status(500).json({ message: "❌ Error al eliminar la tarea", error: error.message });
+  }
+};

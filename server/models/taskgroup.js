@@ -4,33 +4,39 @@ import { sequelize } from '../database/dbConnection.js';
 
 class TaskGroup extends Model {
   static associate(models) {
-    TaskGroup.belongsTo(models.Group, { foreignKey: 'id_group', as: 'group' });
-    TaskGroup.belongsTo(models.User, { foreignKey: 'id_user', as: 'user' });
+    TaskGroup.belongsTo(models.Group, { foreignKey: 'id_group', as: 'groups' });
+    TaskGroup.belongsTo(models.User, { foreignKey: 'id_user', as: 'users' });
   }
 }
 
 TaskGroup.init(
   {
+    id: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
+    },
     id_group: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: false,
     },
     id_user: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: false,
     },
     name: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
     },
     description: {
-      type: DataTypes.STRING
-    }
+      type: DataTypes.STRING,
+    },
   },
   {
     sequelize,
     modelName: 'TaskGroup',
-    timestamps: true
+    tableName: 'taskgroups', 
+    timestamps: true,
   }
 );
 
