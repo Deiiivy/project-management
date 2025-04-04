@@ -11,7 +11,6 @@
   min-height: 100vh;
 }
 
-
 .message {
   padding: 12px 20px;
   margin-bottom: 20px;
@@ -19,23 +18,24 @@
   font-weight: bold;
   transition: all 0.3s ease-in-out;
 }
+
 .message.success {
   background: #4caf50;
   color: white;
 }
+
 .message.error {
   background: #f44336;
   color: white;
 }
 
-
 .Tasks {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); 
+  grid-template-columns: repeat(4, 1fr);
   gap: 20px;
   padding: 0 10px;
   margin-top: 20px;
-  grid-auto-rows: minmax(250px, auto); 
+  grid-auto-rows: minmax(250px, auto);
 }
 
 @media (max-width: 1200px) {
@@ -46,13 +46,13 @@
 
 @media (max-width: 900px) {
   .Tasks {
-    grid-template-columns: repeat(2, 1fr); 
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (max-width: 600px) {
   .Tasks {
-    grid-template-columns: 1fr; 
+    grid-template-columns: 1fr;
   }
 }
 
@@ -69,25 +69,22 @@
   justify-content: space-between;
   height: auto;
   min-height: 220px;
-  overflow: hidden; 
+  overflow: hidden;
 }
-
 
 .task:hover {
   transform: scale(1.05);
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
 }
 
-
 .task-title {
   font-size: 1.2rem;
   font-weight: 600;
   margin-bottom: 10px;
-  color: #ffcc00; 
+  color: #ffffff;
   text-transform: uppercase;
   letter-spacing: 1px;
 }
-
 
 .task-description {
   font-size: 1rem;
@@ -96,8 +93,10 @@
   flex-grow: 1;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
-  max-height: 60px; 
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  word-wrap: break-word;
 }
 
 .btns {
@@ -108,9 +107,9 @@
 }
 
 .btnDelete, .btnUpdate {
-  padding: 12px 20px;
-  border-radius: 8px;
-  font-size: 1.1rem;
+  padding: 8px 15px;
+  border-radius: 6px;
+  font-size: 0.9rem;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.3s ease;
   font-weight: bold;
@@ -119,7 +118,7 @@
 }
 
 .btnDelete {
-  background: #e53935; 
+  background: #e53935;
   color: white;
 }
 
@@ -129,7 +128,7 @@
 }
 
 .btnUpdate {
-  background: #388e3c; 
+  background: #388e3c;
   color: white;
   text-decoration: none;
 }
@@ -138,7 +137,6 @@
   background: #2c6b32;
   transform: scale(1.05);
 }
-
 
 .task.removed {
   transform: scale(0);
