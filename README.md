@@ -52,6 +52,8 @@ npm run dev
 
 Abre una nueva terminal y accede a la carpeta del servidor:
 
+asegurate de estar en la carpeta del proyecto clonado
+
 ```bash
 cd server
 ```
