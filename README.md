@@ -40,6 +40,7 @@ Accede a la carpeta del cliente y ejecuta el siguiente comando para instalar las
 cd client
 npm install
 ```
+espera a que termine la instalacion de dependencias y luego:
 
 Inicia el cliente:
 
