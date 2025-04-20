@@ -89,8 +89,8 @@ npm start
 
 ## Verificación
 
-- **Backend**: Abre tu navegador y ve a `http://localhost:3000` o el puerto que hayas configurado para el servidor.
-- **Frontend**: Abre tu navegador y ve a `http://localhost:5173` (o el puerto que hayas configurado para el frontend).
+- **Backend**: Abre tu navegador y ve a `http://localhost:3000` 
+- **Frontend**: Abre tu navegador y ve a `http://localhost:5173` 
 
 ---
 
@@ -102,4 +102,4 @@ npm start
 
 ---
 
-¡Listo! Ahora deberías tener la aplicación corriendo correctamente. Si tienes algún problema durante la instalación o ejecución, no dudes en avisarme para ayudarte. 😊
+¡Listo! Ahora deberías tener la aplicación corriendo correctamente.
