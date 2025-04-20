@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon index.js",
-   "sequelize": "npx sequelize-cli --url 'mysql://deiiivy:2006@localhost:3306/project_management'"
+    "sequelize": "npx sequelize-cli --url 'mysql://deiiivy:2006@localhost:3306/project_management'"
   },
   "keywords": [],
   "author": "",
@@ -21,5 +21,8 @@
     "mysql2": "^3.12.0",
     "nodemon": "^3.1.9",
     "sequelize": "^6.37.5"
+  },
+  "devDependencies": {
+    "sequelize-cli": "^6.6.2"
   }
 }
